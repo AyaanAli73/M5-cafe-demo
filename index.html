@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M5 Cafe Jodhpur | The Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sage': {
+                            50: '#F5F7F5',
+                            100: '#E8EDE9',
+                            200: '#CFDBD2',
+                            500: '#7E9C87',
+                            800: '#4A5D50',
+                            900: '#35423A',
+                        },
+                        'clay': '#E07A5F',
+                        'sand': '#F5F5F0',
+                        'paper': '#FFFFFF',
+                        'swiggy': '#FC8019',
+                        'zomato': '#E23744', 
+                    },
+                    fontFamily: {
+                        'sans': ['Outfit', 'sans-serif'],
+                        'serif': ['DM Serif Display', 'serif'],
+                        'hand': ['Dancing Script', 'cursive'],
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                        'polaroid': '0 10px 30px -5px rgba(0,0,0,0.15)',
+                        'soft': '0 20px 40px -15px rgba(0,0,0,0.05)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+                        'pop-in': 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        popIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased selection:bg-sage-200 selection:text-sage-900">
+    
+    <!-- Loading Overlay -->
+    <div id="loader" class="fixed inset-0 bg-sage-50 z-[100] flex flex-col items-center justify-center transition-opacity duration-500">
+        <div class="w-16 h-16 border-4 border-sage-200 border-t-clay rounded-full animate-spin mb-4"></div>
+        <span class="font-serif text-2xl text-sage-900 tracking-widest">M5</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 px-6 bg-transparent">
+        <div class="max-w-7xl mx-auto flex justify-between items-center bg-white/80 backdrop-blur-md rounded-full px-8 py-3 shadow-glass border border-white/40">
+            <!-- Logo Section -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full overflow-hidden bg-white border border-sage-200 flex items-center justify-center">
+                    <img src="assets/images/logo.jpg" alt="M5 Logo" class="w-full h-full object-cover">
+                </div>
+                <span class="font-bold text-sm tracking-widest text-sage-900 uppercase">Cafe</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-sage-800">
+                <a href="#home" class="hover:text-clay transition-colors">Home</a>
+                <a href="#diary" class="hover:text-clay transition-colors">Diary</a>
+                <a href="#menu" class="hover:text-clay transition-colors">Menu</a>
+                <a href="#gallery" class="hover:text-clay transition-colors">Gallery</a>
+                <a href="#location" class="hover:text-clay transition-colors">Contact</a>
+            </div>
+
+            <!-- CTA -->
+            <div class="hidden md:flex items-center gap-3">
+                <a href="#delivery" class="px-6 py-2 rounded-full bg-sage-900 text-white text-xs font-bold uppercase tracking-widest hover:bg-clay transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                    Order Now
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="hamburger-btn" class="md:hidden text-sage-900 text-xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div id="mobile-menu-overlay" class="absolute inset-0 bg-white/95"></div>
+        <div class="relative h-full flex flex-col justify-center items-center gap-8 p-8 text-center">
+            <button id="close-menu-btn" class="absolute top-8 right-8 text-2xl text-sage-900 hover:text-clay transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="#home" class="mobile-link text-3xl font-serif text-sage-900 hover:text-clay transition-colors">Home</a>
+            <a href="#diary" class="mobile-link text-3xl font-serif text-sage-900 hover:text-clay transition-colors">Diary</a>
+            <a href="#menu" class="mobile-link text-3xl font-serif text-sage-900 hover:text-clay transition-colors">Menu</a>
+            <a href="#gallery" class="mobile-link text-3xl font-serif text-sage-900 hover:text-clay transition-colors">Gallery</a>
+            <a href="#location" class="mobile-link text-3xl font-serif text-sage-900 hover:text-clay transition-colors">Location</a>
+            <a href="#delivery" class="mobile-link text-xl font-bold uppercase tracking-widest text-clay mt-4">Order Now</a>
+        </div>
+    </div>
+
+    <!-- COMPACT Hero Section -->
+    <section id="home" class="relative pt-32 pb-12 px-6 flex flex-col justify-center overflow-hidden">
+        <div class="absolute top-0 -left-4 w-[500px] h-[500px] bg-sage-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-[500px] h-[500px] bg-yellow-100 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-6xl mx-auto w-full grid md:grid-cols-12 gap-8 items-center relative z-10">
+            <!-- Text Side -->
+            <div class="md:col-span-7 space-y-6 animate-fade-in-up">
+                <div class="inline-block px-4 py-2 rounded-full bg-white border border-sage-100 shadow-sm text-sage-600 text-[10px] font-bold uppercase tracking-widest">
+                    📍 Shastri Nagar, Jodhpur
+                </div>
+                <h1 class="text-5xl md:text-7xl font-serif text-sage-900 leading-[0.9]">
+                    Taste the <br>
+                    <span id="typewriter-text" class="italic font-light text-clay">Comfort</span><span class="cursor-blink h-12 align-middle ml-1"></span>
+                </h1>
+                <p class="text-base text-sage-700 max-w-lg leading-relaxed font-light">
+                    From our signature <strong>Matka Pizza</strong> to hand-crafted lattes. We don't just serve food; we serve memories.
+                </p>
+                
+                <!-- BRANDED BUTTONS WITH ICONS -->
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="https://www.swiggy.com/city/jodhpur/m5-cafe-chopasni-road-nehru-nagar-rest594302" target="_blank" class="flex items-center gap-3 px-6 py-3 bg-[#FC8019] text-white rounded-full hover:bg-[#d96d15] transition-all shadow-md hover:shadow-lg hover:-translate-y-1 group">
+                        <i class="fas fa-motorcycle text-lg"></i>
+                        <span class="text-[10px] font-bold uppercase tracking-widest">Swiggy</span>
+                    </a>
+                    <a href="https://www.zomato.com/jodhpur/restaurants?q=M5+Cafe" target="_blank" class="flex items-center gap-3 px-6 py-3 bg-[#E23744] text-white rounded-full hover:bg-[#c21f2b] transition-all shadow-md hover:shadow-lg hover:-translate-y-1 group">
+                        <i class="fas fa-utensils text-lg"></i>
+                        <span class="text-[10px] font-bold uppercase tracking-widest">Zomato</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Compact Image Side with Quote Card -->
+            <div class="md:col-span-5 relative animate-fade-in-up" style="animation-delay: 0.2s">
+                <div class="relative h-[400px] w-full rounded-[2.5rem] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-700 bg-gray-100">
+                    <img src="assets/images/backside.webp" class="w-full h-full object-cover" alt="Cafe Drink" onerror="this.onerror=null;this.src='https://placehold.co/600x800?text=M5+Cafe';">
+                    
+                    <!-- Quote Card -->
+                    <div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl">
+                        <p class="font-hand text-2xl text-sage-900 leading-tight">"Where conversations brew and time slows down."</p>
+                        <div class="flex items-center gap-2 mt-2">
+                            <div class="w-6 h-px bg-clay"></div>
+                            <span class="text-[10px] uppercase font-bold text-clay tracking-widest">M5 Vibe</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The M5 Diary (Polaroid Vibe) -->
+    <section id="diary" class="py-20 px-6 bg-sage-50 overflow-hidden border-y border-sage-100">
+        <div class="max-w-7xl mx-auto mb-16 text-center">
+            <span class="text-clay font-bold uppercase tracking-widest text-xs">The Vibe</span>
+            <h2 class="text-4xl md:text-5xl font-serif text-sage-900 mt-2">Moments at M5</h2>
+        </div>
+
+        <!-- Scattered Polaroid Layout -->
+        <div class="max-w-5xl mx-auto relative h-[700px] md:h-[500px]">
+            <!-- Item 1 -->
+            <div class="absolute top-0 left-0 md:left-20 w-60 md:w-72 bg-white p-3 rounded-sm shadow-polaroid transform -rotate-3 hover:rotate-0 hover:z-10 transition-all duration-500 hover:scale-105 cursor-pointer">
+                <img src="assets/images/inner.webp" class="w-full h-60 object-cover mb-3 grayscale hover:grayscale-0 transition-all" onerror="this.onerror=null;this.src='https://placehold.co/600x600?text=M5+Vibes';">
+                <p class="font-hand text-xl text-center text-sage-900">Sitting</p>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="absolute top-10 right-0 md:right-32 w-56 md:w-64 bg-white p-3 rounded-sm shadow-polaroid transform rotate-3 hover:rotate-0 hover:z-10 transition-all duration-500 hover:scale-105 cursor-pointer z-10">
+                <img src="assets/images/latte.webp" class="w-full h-52 object-cover mb-3 grayscale hover:grayscale-0 transition-all" onerror="this.onerror=null;this.src='https://placehold.co/600x600?text=Latte+Art';">
+                <p class="font-hand text-xl text-center text-sage-900">Latte Art ☕</p>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="absolute bottom-10 left-10 md:left-[35%] w-64 md:w-80 bg-white p-3 rounded-sm shadow-polaroid transform rotate-1 hover:rotate-0 hover:z-10 transition-all duration-500 hover:scale-105 z-0">
+                <img src="assets/images/backside.webp" class="w-full h-64 object-cover mb-3 grayscale hover:grayscale-0 transition-all" onerror="this.onerror=null;this.src='https://placehold.co/600x600?text=Memories';">
+                <p class="font-hand text-xl text-center text-sage-900">Outer Side✨</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW MENU: "Pebble" Oval Layout -->
+    <section id="menu" class="py-24 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Header + Filter -->
+            <div class="flex flex-col items-center mb-16">
+                <span class="text-clay font-bold uppercase tracking-widest text-xs">Curated Cravings</span>
+                <h2 class="text-5xl font-serif text-sage-900 mt-2 mb-8 text-center">The Collection</h2>
+                
+                <div class="flex flex-wrap justify-center gap-2 bg-sage-50 p-2 rounded-3xl shadow-inner max-w-full mx-auto">
+                    <button class="filter-btn active px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest bg-sage-900 text-white transition-all shadow-md" data-filter="all">All</button>
+                    <button class="filter-btn px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-sage-500 hover:text-sage-900 hover:bg-white transition-all" data-filter="pizza">Pizza</button>
+                    <button class="filter-btn px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-sage-500 hover:text-sage-900 hover:bg-white transition-all" data-filter="coffee">Coffee</button>
+                    <button class="filter-btn px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-sage-500 hover:text-sage-900 hover:bg-white transition-all" data-filter="snack">Snacks</button>
+                </div>
+            </div>
+
+            <!-- Oval Grid Container (Two Columns) -->
+            <div class="grid md:grid-cols-2 gap-x-12 gap-y-6">
+                
+                <!-- Left Column -->
+                <div class="space-y-6 menu-col-left">
+                    
+                    <!-- Item 1 -->
+                    <div class="menu-item pizza group flex items-center gap-4 bg-sage-50 p-3 pr-8 rounded-[3rem] hover:bg-white hover:shadow-soft transition-all border border-transparent hover:border-sage-100 cursor-pointer animate-pop-in">
+                        <div class="w-24 h-24 rounded-full overflow-hidden shrink-0 border-4 border-white shadow-sm">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-4p-4X8tX_H3G_iXm3X_6X3X_6X3X_6X3Xw&s" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/200x200?text=M5+Special';">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <h3 class="font-bold text-lg text-sage-900 font-serif">Matka Pizza</h3>
+                                <span class="text-clay font-bold">₹249</span>
+                            </div>
+                            <p class="text-xs text-sage-500 line-clamp-1">Baked in a clay pot for smoky flavor.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="menu-item snack group flex items-center gap-4 bg-sage-50 p-3 pr-8 rounded-[3rem] hover:bg-white hover:shadow-soft transition-all border border-transparent hover:border-sage-100 cursor-pointer animate-pop-in">
+                        <div class="w-24 h-24 rounded-full overflow-hidden shrink-0 border-4 border-white shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1630384060421-a4323ce66488?q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/200x200?text=M5+Special';">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <h3 class="font-bold text-lg text-sage-900 font-serif">Peri Peri Fries</h3>
+                                <span class="text-clay font-bold">₹129</span>
+                            </div>
+                            <p class="text-xs text-sage-500 line-clamp-1">Crispy fries tossed in spicy masala.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="menu-item coffee group flex items-center gap-4 bg-sage-50 p-3 pr-8 rounded-[3rem] hover:bg-white hover:shadow-soft transition-all border border-transparent hover:border-sage-100 cursor-pointer animate-pop-in">
+                        <div class="w-24 h-24 rounded-full overflow-hidden shrink-0 border-4 border-white shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1461023058943-48db33005409?q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/200x200?text=M5+Special';">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <h3 class="font-bold text-lg text-sage-900 font-serif">Classic Cold</h3>
+                                <span class="text-clay font-bold">₹160</span>
+                            </div>
+                            <p class="text-xs text-sage-500 line-clamp-1">Blended with vanilla ice cream.</p>
+                        </div>
+                    </div>
+
+                     <!-- Item 7 -->
+                     <div class="menu-item pizza group flex items-center gap-4 bg-sage-50 p-3 pr-8 rounded-[3rem] hover:bg-white hover:shadow-soft transition-all border border-transparent hover:border-sage-100 cursor-pointer animate-pop-in">
+                        <div class="w-24 h-24 rounded-full overflow-hidden shrink-0 border-4 border-white shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/200x200?text=M5+Special';">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <h3 class="font-bold text-lg text-sage-900 font-serif">Paneer Tikka</h3>
+                                <span class="text-clay font-bold">₹239</span>
+                            </div>
+                            <p class="text-xs text-sage-500 line-clamp-1">Spicy marinated paneer chunks.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column (Offset Down for Zigzag) -->
+                <div class="space-y-6 menu-col-right">
+                    
+                    <!-- Item 2 -->
+                    <div class="menu-item coffee group flex items-center gap-4 bg-sage-50 p-3 pr-8 rounded-[3rem] hover:bg-white hover:shadow-soft transition-all border border-transparent hover:border-sage-100 cursor-pointer animate-pop-in">
+                        <div class="w-24 h-24 rounded-full overflow-hidden shrink-0 border-4 border-white shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/200x200?text=M5+Special';">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <h3 class="font-bold text-lg text-sage-900 font-serif">Hazelnut Latte</h3>
+                                <span class="text-clay font-bold">₹180</span>
+                            </div>
+                            <p class="text-xs text-sage-500 line-clamp-1">Roasted hazelnut syrup with espresso.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="menu-item pizza group flex items-center gap-4 bg-sage-50 p-3 pr-8 rounded-[3rem] hover:bg-white hover:shadow-soft transition-all border border-transparent hover:border-sage-100 cursor-pointer animate-pop-in">
+                        <div class="w-24 h-24 rounded-full overflow-hidden shrink-0 border-4 border-white shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/200x200?text=M5+Special';">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <h3 class="font-bold text-lg text-sage-900 font-serif">Farmhouse</h3>
+                                <span class="text-clay font-bold">₹219</span>
+                            </div>
+                            <p class="text-xs text-sage-500 line-clamp-1">Loaded with bell peppers and corn.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 6 -->
+                    <div class="menu-item snack group flex items-center gap-4 bg-sage-50 p-3 pr-8 rounded-[3rem] hover:bg-white hover:shadow-soft transition-all border border-transparent hover:border-sage-100 cursor-pointer animate-pop-in">
+                        <div class="w-24 h-24 rounded-full overflow-hidden shrink-0 border-4 border-white shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/200x200?text=M5+Special';">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <h3 class="font-bold text-lg text-sage-900 font-serif">Corn Sandwich</h3>
+                                <span class="text-clay font-bold">₹189</span>
+                            </div>
+                            <p class="text-xs text-sage-500 line-clamp-1">Grilled stuffed with creamy corn.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 8 -->
+                    <div class="menu-item snack group flex items-center gap-4 bg-sage-50 p-3 pr-8 rounded-[3rem] hover:bg-white hover:shadow-soft transition-all border border-transparent hover:border-sage-100 cursor-pointer animate-pop-in">
+                        <div class="w-24 h-24 rounded-full overflow-hidden shrink-0 border-4 border-white shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/200x200?text=M5+Special';">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <h3 class="font-bold text-lg text-sage-900 font-serif">White Pasta</h3>
+                                <span class="text-clay font-bold">₹229</span>
+                            </div>
+                            <p class="text-xs text-sage-500 line-clamp-1">Creamy bechamel sauce with veggies.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW GALLERY: Memories Grid -->
+    <section id="gallery" class="py-24 px-6 bg-sage-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12 flex justify-between items-end">
+                <div>
+                    <span class="text-clay font-bold uppercase tracking-widest text-xs">Vibe Check</span>
+                    <h2 class="text-4xl md:text-5xl font-serif text-sage-900 mt-2">M5 Memories</h2>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 h-[600px] md:h-[500px]">
+                <div class="col-span-1 row-span-2 relative rounded-[2rem] overflow-hidden group">
+                    <img src="assets/images/inner3.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null;this.src='https://placehold.co/400x800?text=Good+Vibes';">
+                </div>
+                <div class="col-span-1 row-span-1 relative rounded-[2rem] overflow-hidden group">
+                    <img src="assets/images/inner1.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null;this.src='https://placehold.co/400x400?text=Vibe';">
+                </div>
+                <div class="col-span-1 row-span-1 relative rounded-[2rem] overflow-hidden group">
+                    <img src="assets/images/latte.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null;this.src='https://placehold.co/400x400?text=Coffee';">
+                </div>
+                <div class="col-span-1 row-span-2 relative rounded-[2rem] overflow-hidden group">
+                    <img src="assets/images/inner2.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null;this.src='https://placehold.co/400x800?text=Friends';">
+                </div>
+                <div class="col-span-2 row-span-1 relative rounded-[2rem] overflow-hidden group bg-sage-900 flex items-center justify-center">
+                    <p class="text-white font-serif italic text-2xl">Good Times & Coffee</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery CTA -->
+    <section id="delivery" class="py-24 px-6 bg-white border-t border-sage-100">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-serif text-sage-900 mb-6">M5 at your Doorstep</h2>
+            <p class="text-sage-700 mb-12">Craving comfort food? Order now.</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <a href="https://www.swiggy.com/city/jodhpur/m5-cafe-chopasni-road-nehru-nagar-rest594302" target="_blank" class="group relative overflow-hidden bg-sage-50 border border-sage-200 p-8 rounded-[2.5rem] hover:shadow-lg transition-all">
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-motorcycle text-4xl mb-4 text-[#FC8019]"></i>
+                        <span class="inline-flex items-center gap-2 text-white font-bold text-xs uppercase tracking-widest bg-[#FC8019] px-6 py-2 rounded-full group-hover:scale-105 transition-transform mt-2">
+                            Order on Swiggy <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </a>
+                <a href="https://www.zomato.com/jodhpur/restaurants?q=M5+Cafe" target="_blank" class="group relative overflow-hidden bg-sage-50 border border-sage-200 p-8 rounded-[2.5rem] hover:shadow-lg transition-all">
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-utensils text-4xl mb-4 text-[#E23744]"></i>
+                        <span class="inline-flex items-center gap-2 text-white font-bold text-xs uppercase tracking-widest bg-[#E23744] px-6 py-2 rounded-full group-hover:scale-105 transition-transform mt-2">
+                            Order on Zomato <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="location" class="bg-sage-900 text-white pt-24 pb-8 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 mb-16 border-b border-sage-200 pb-12">
+            <div>
+                <h2 class="text-3xl font-serif italic mb-6">M5 Cafe.</h2>
+                <div class="space-y-6 text-sage-300">
+                    <p class="flex items-start gap-4">
+                        <i class="fas fa-map-pin mt-1 text-clay"></i>
+                        <span>Plot 222, Near Juna Khedapati Temple,<br>West Part, Kamla Nehru Nagar,<br>Jodhpur, Rajasthan</span>
+                    </p>
+                    <p class="flex items-center gap-4">
+                        <i class="fas fa-phone text-clay"></i>
+                        +91 7413-855589
+                    </p>
+                </div>
+            </div>
+            <div class="h-64 rounded-3xl overflow-hidden border-4 border-white shadow-lg">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.6713406456046!2d72.9972363753665!3d26.267156977037746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39418c39eb1419ef%3A0x6b093259850608c0!2sShastri%20Nagar%2C%20Jodhpur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1709560000000!5m2!1sen!2sin" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+        <div class="text-center text-xs text-sage-500 uppercase tracking-widest">
+            <p>&copy; 2024 M5 Cafe Jodhpur.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
